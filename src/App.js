@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './components/Layout/Header';
+import Sidebar from './components/Layout/Sidebar';
+import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('dashboard');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <div className="app-body">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <main className="main-content">
+          {activeTab === 'dashboard' && <Dashboard />}
+          {activeTab === 'clients' && <div>Clientes em desenvolvimento...</div>}
+          {activeTab === 'products' && <div>Produtos em desenvolvimento...</div>}
+          {activeTab === 'sales' && <div>Vendas em desenvolvimento...</div>}
+          {activeTab === 'reports' && <div>Relatórios em desenvolvimento...</div>}
+        </main>
+      </div>
     </div>
   );
 }
